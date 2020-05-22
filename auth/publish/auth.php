@@ -10,10 +10,11 @@ declare(strict_types=1);
  * @license  https://github.com/lazystore/store-server/blob/master/LICENSE
  */
 return [
-    'handler' => [
-        'http' => [
-            App\Exception\Handler\AppExceptionHandler::class,
-            Hyperf\ExceptionHandler\Handler\WhoopsExceptionHandler::class,
+    'default' => 'jwt',
+    'guards' => [
+        'jwt' => [
+            'driver' => Qbhy\Auth\Jwt\JwtGuard::class,
+            'secret' => env('JWT_SECRET', 'qbhy/hyperf-auth'),
         ],
     ],
 ];

@@ -9,11 +9,11 @@ declare(strict_types=1);
  * @contact  qbhy0715@qq.com
  * @license  https://github.com/lazystore/store-server/blob/master/LICENSE
  */
-return [
-    'handler' => [
-        'http' => [
-            App\Exception\Handler\AppExceptionHandler::class,
-            Hyperf\ExceptionHandler\Handler\WhoopsExceptionHandler::class,
-        ],
-    ],
-];
+namespace Qbhy\Auth;
+
+interface Authenticatable
+{
+    public function getKey();
+
+    public static function findFromKey(string $key): ?Authenticatable;
+}

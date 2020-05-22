@@ -9,15 +9,19 @@ declare(strict_types=1);
  * @contact  qbhy0715@qq.com
  * @license  https://github.com/lazystore/store-server/blob/master/LICENSE
  */
-namespace App\Model;
+namespace Qbhy\Auth;
 
-use Hyperf\DbConnection\Model\Model as BaseModel;
-use Hyperf\ModelCache\Cacheable;
-use Hyperf\ModelCache\CacheableInterface;
+use Hyperf\Database\Model\Model;
 
-abstract class Model extends BaseModel implements CacheableInterface
+/**
+ * Trait AuthAbility.
+ * @mixin Authenticatable|Model
+ */
+trait AuthAbility
 {
-    use Cacheable;
-
-    protected $guarded = [];
+    public static function findFromKey(string $key): ?Authenticatable
+    {
+        /** @var null|Authenticatable|Model $user */
+        return self::query()->find($key);
+    }
 }

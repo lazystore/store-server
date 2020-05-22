@@ -9,11 +9,15 @@ declare(strict_types=1);
  * @contact  qbhy0715@qq.com
  * @license  https://github.com/lazystore/store-server/blob/master/LICENSE
  */
-return [
-    'handler' => [
-        'http' => [
-            App\Exception\Handler\AppExceptionHandler::class,
-            Hyperf\ExceptionHandler\Handler\WhoopsExceptionHandler::class,
-        ],
-    ],
-];
+namespace Qbhy\Auth;
+
+abstract class AuthGuard extends Driver
+{
+    abstract public function login(Authenticatable $user);
+
+    abstract public function user(): ?Authenticatable;
+
+    abstract public function check(): bool;
+
+    abstract public function logout();
+}

@@ -9,11 +9,17 @@ declare(strict_types=1);
  * @contact  qbhy0715@qq.com
  * @license  https://github.com/lazystore/store-server/blob/master/LICENSE
  */
-return [
-    'handler' => [
-        'http' => [
-            App\Exception\Handler\AppExceptionHandler::class,
-            Hyperf\ExceptionHandler\Handler\WhoopsExceptionHandler::class,
-        ],
-    ],
-];
+namespace HyperfTest\Cases;
+
+use HyperfTest\HttpTestCase;
+
+/**
+ * @internal
+ * @coversNothing
+ */
+class AuthTest extends HttpTestCase
+{
+    public function testExample()
+    {
+    }
+}
