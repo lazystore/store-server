@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 /**
- * This file is part of Hyperf.
+ * This file is part of lazystore.
  *
- * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ * @link     https://github.com/lazystore/store-server
+ * @document https://github.com/lazystore/store-server/blob/master/README.md
+ * @contact  qbhy0715@qq.com
+ * @license  https://github.com/lazystore/store-server/blob/master/LICENSE
  */
-
 return [
     'default' => [
         'driver' => env('DB_DRIVER', 'mysql'),

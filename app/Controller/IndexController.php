@@ -2,33 +2,27 @@
 
 declare(strict_types=1);
 /**
- * This file is part of Hyperf.
+ * This file is part of lazystore.
  *
- * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ * @link     https://github.com/lazystore/store-server
+ * @document https://github.com/lazystore/store-server/blob/master/README.md
+ * @contact  qbhy0715@qq.com
+ * @license  https://github.com/lazystore/store-server/blob/master/LICENSE
  */
-
 namespace App\Controller;
 
-use Hyperf\AsyncQueue\Annotation\AsyncQueueMessage;
-use Hyperf\HttpServer\Annotation\Controller;
-use Hyperf\HttpServer\Annotation\GetMapping;
-use Hyperf\HttpServer\Annotation\Middleware;
-use Hyperf\HttpServer\Annotation\PostMapping;
 use App\Middleware\ExampleMiddleware;
+use Hyperf\HttpServer\Annotation\Controller;
+use Hyperf\HttpServer\Annotation\Middleware;
 use Hyperf\HttpServer\Request;
 
 /**
- * @Controller()
+ * @Controller
  * @Middleware(ExampleMiddleware::class)
  * Class IndexController
- * @package App\Controller
  */
 class IndexController extends AbstractController
 {
-
     /**
      * @return array
      */
@@ -41,14 +35,5 @@ class IndexController extends AbstractController
             'method' => $method,
             'message' => "Hello {$user}.",
         ];
-    }
-
-    /**
-     * @GetMapping(path="/test")
-     * @return string
-     */
-    public function test()
-    {
-        return 'test';
     }
 }
