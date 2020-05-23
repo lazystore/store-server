@@ -9,8 +9,14 @@ declare(strict_types=1);
  * @contact  qbhy0715@qq.com
  * @license  https://github.com/lazystore/store-server/blob/master/LICENSE
  */
-namespace Qbhy\Auth;
+use Hyperf\Session\Handler;
 
-abstract class Driver
-{
-}
+return [
+    'handler' => Handler\FileHandler::class,
+    'options' => [
+        'connection' => 'default',
+        'path' => BASE_PATH . '/runtime/session',
+        'gc_maxlifetime' => 1200,
+        'session_name' => 'HYPERF_SESSION_ID',
+    ],
+];

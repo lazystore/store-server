@@ -10,17 +10,22 @@ declare(strict_types=1);
  * @license  https://github.com/lazystore/store-server/blob/master/LICENSE
  */
 return [
-    // 默认驱动
     'default' => 'jwt',
-
-    /*
-     * 支持的驱动，用户可以自己添加驱动
-     */
     'guards' => [
         'jwt' => [
-            'driver' => Qbhy\Auth\Jwt\JwtGuard::class,
+            'driver' => Qbhy\HyperfAuth\Guard\JwtGuard::class,
+            'provider' => 'users',
             'secret' => env('JWT_SECRET', 'qbhy/hyperf-auth'),
-            'model' => \App\Model\User::class,
+        ],
+        'session' => [
+            'driver' => Qbhy\HyperfAuth\Guard\SessionGuard::class,
+            'provider' => 'users',
+        ],
+    ],
+    'providers' => [
+        'users' => [
+            'driver' => \Qbhy\HyperfAuth\Provider\EloquentProvider::class,
+            'model' => App\Model\User::class, //  需要实现 Qbhy\HyperfAuth\Authenticatable 接口
         ],
     ],
 ];

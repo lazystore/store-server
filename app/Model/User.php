@@ -11,8 +11,8 @@ declare(strict_types=1);
  */
 namespace App\Model;
 
-use Qbhy\Auth\AuthAbility;
-use Qbhy\Auth\Authenticatable;
+use Qbhy\HyperfAuth\AuthAbility;
+use Qbhy\HyperfAuth\Authenticatable;
 
 class User extends Model implements Authenticatable
 {
@@ -31,4 +31,9 @@ class User extends Model implements Authenticatable
      * @var array
      */
     protected $casts = [];
+
+    public function getKey()
+    {
+        return $this->id;
+    }
 }
