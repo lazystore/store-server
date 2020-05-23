@@ -38,12 +38,13 @@ class IndexController extends AbstractController
      */
     public function index(Request $request)
     {
-        $user = $this->request->input('user', 'Hyperf');
         $method = $this->request->getMethod();
+
+        $user = $this->auth->guard('session')->user();
 
         return [
             'method' => $method,
-            'message' => "Hello {$user}.",
+            'user' => $user ? $user->name : 'no login',
         ];
     }
 
