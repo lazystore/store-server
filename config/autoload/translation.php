@@ -10,11 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/lazystore/store-server/blob/master/LICENSE
  */
 return [
-    'handler' => [
-        'http' => [
-            App\Exception\Handler\AppExceptionHandler::class,
-            Hyperf\ExceptionHandler\Handler\WhoopsExceptionHandler::class,
-            Qbhy\HyperfAuth\AuthExceptionHandler::class,
-        ],
-    ],
+    'locale' => 'zh_CN',
+    'fallback_locale' => 'en',
+    'path' => BASE_PATH . '/storage/languages',
 ];

@@ -18,6 +18,8 @@ use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\GetMapping;
 use Hyperf\HttpServer\Annotation\Middleware;
 use Hyperf\HttpServer\Request;
+use Hyperf\Validation\Contract\ValidatorFactoryInterface;
+use Qbhy\HyperfAuth\Annotation\Auth;
 use Qbhy\HyperfAuth\AuthManager;
 
 /**
@@ -34,9 +36,27 @@ class IndexController extends AbstractController
     protected $auth;
 
     /**
-     * @return array
+     * @Inject
+     * @var ValidatorFactoryInterface
      */
-    public function index(Request $request)
+    protected $validator;
+
+    /**
+     * @GetMapping(path="/test")
+     */
+    public function validate(Request $request)
+    {
+        $v = $this->validator->make($request->all(), [
+            'id' => 'required',
+        ]);
+
+        return $v->errors();
+    }
+
+    /**
+     * @GetMapping(path="/")
+     */
+    public function index(): array
     {
         $method = $this->request->getMethod();
 
@@ -58,7 +78,7 @@ class IndexController extends AbstractController
         User::query();
         $user = User::query()->firstOrCreate(['name' => 'text', 'avatar' => 'avatar']);
         return [
-            'token' => $this->auth->guard('session')->login($user),
+            'token' => $this->auth->guard()->login($user),
         ];
     }
 
@@ -67,17 +87,18 @@ class IndexController extends AbstractController
      */
     public function logout()
     {
-        $this->auth->guard('session')->logout();
+        $this->auth->guard()->logout();
         return 'logout ok';
     }
 
     /**
+     * @Auth
      * @GetMapping(path="/user")
      * @return string
      */
     public function user()
     {
-        $user = $this->auth->guard('session')->user();
+        $user = $this->auth->guard()->user();
         return $user ? $user->name : 'no login';
     }
 }

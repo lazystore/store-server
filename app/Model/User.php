@@ -14,6 +14,13 @@ namespace App\Model;
 use Qbhy\HyperfAuth\AuthAbility;
 use Qbhy\HyperfAuth\Authenticatable;
 
+/**
+ * @property int $id
+ * @property string $avatar
+ * @property string $name
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ */
 class User extends Model implements Authenticatable
 {
     use AuthAbility;
@@ -30,7 +37,7 @@ class User extends Model implements Authenticatable
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = ['id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 
     public function getKey()
     {
