@@ -34,9 +34,10 @@
         "hyperf/model-cache": "~1.1.0",
         "hyperf/devtool": "^1.1",
         "brainmaestro/composer-git-hooks": "^2.8",
-        "96qbhy/hyperf-auth": "^v1.4",
+        "96qbhy/hyperf-auth": "^v1.0",
         "hyperf/session": "^1.1",
-        "hyperf/validation": "^1.1"
+        "hyperf/validation": "^1.1",
+        "symfony/var-dumper": "^5.1"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",

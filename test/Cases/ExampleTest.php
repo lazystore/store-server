@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 namespace HyperfTest\Cases;
 
+use Hyperf\Redis\Redis;
 use HyperfTest\HttpTestCase;
 
 /**
@@ -22,6 +23,14 @@ class ExampleTest extends HttpTestCase
     public function testExample()
     {
         $this->assertTrue(true);
-        $this->assertTrue(is_array($this->get('/')));
+//        $this->assertTrue(is_array($this->get('/')));
+    }
+
+    public function testRedis()
+    {
+        $redis = make(Redis::class);
+        var_dump($redis->set('a', 'xxx'));
+        var_dump($redis->get('a'));
+        $this->assertTrue(true);
     }
 }

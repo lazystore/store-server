@@ -11,12 +11,11 @@ declare(strict_types=1);
  */
 namespace App\Controller;
 
-use App\Middleware\ExampleMiddleware;
 use App\Model\User;
+use Hyperf\Contract\ContainerInterface;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\GetMapping;
-use Hyperf\HttpServer\Annotation\Middleware;
 use Hyperf\HttpServer\Request;
 use Hyperf\Validation\Contract\ValidatorFactoryInterface;
 use Qbhy\HyperfAuth\Annotation\Auth;
@@ -24,7 +23,6 @@ use Qbhy\HyperfAuth\AuthManager;
 
 /**
  * @Controller
- * @Middleware(ExampleMiddleware::class)
  * Class IndexController
  */
 class IndexController extends AbstractController
@@ -54,9 +52,10 @@ class IndexController extends AbstractController
     }
 
     /**
+     * @Auth("session")
      * @GetMapping(path="/")
      */
-    public function index(): array
+    public function index(ContainerInterface $container): array
     {
         $method = $this->request->getMethod();
 
@@ -78,7 +77,7 @@ class IndexController extends AbstractController
         User::query();
         $user = User::query()->firstOrCreate(['name' => 'text', 'avatar' => 'avatar']);
         return [
-            'token' => $this->auth->guard()->login($user),
+            'token' => $this->auth->guard('session')->login($user),
         ];
     }
 

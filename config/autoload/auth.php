@@ -69,7 +69,9 @@ return [
              * 可选配置
              * 缓存类
              */
-            'cache' => new \Doctrine\Common\Cache\FilesystemCache(sys_get_temp_dir()),
+            'cache' => function () {
+                return make(\Qbhy\HyperfAuth\HyperfRedisCache::class);
+            },
 
             /*
              * 可选配置
